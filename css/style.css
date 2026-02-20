@@ -1,0 +1,755 @@
+/* ============================================
+   CSS Variables - Theme Support
+   ============================================ */
+
+:root {
+    /* Dark Theme (Default) */
+    --bg-primary: #0a0a0f;
+    --bg-card: #12121a;
+    --bg-surface: #1a1a25;
+    --bg-gradient-top: #1a1a2e;
+    --bg-gradient-bottom: #0f0f1a;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #8888aa;
+    
+    --primary-color: #00f0ff;
+    --primary-glow: rgba(0, 240, 255, 0.5);
+    --accent-color: #00ff88;
+    --secondary-color: #7b2cbf;
+    
+    --border-color: #2a2a3a;
+    --success-color: #00ff88;
+    --warning-color: #ffaa00;
+    --error-color: #ff4757;
+    
+    --shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+    --shadow-hover: 0 0 30px rgba(0, 240, 255, 0.2);
+    
+    --transition-speed: 0.3s;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+    --bg-primary: #f5f5f7;
+    --bg-card: #ffffff;
+    --bg-surface: #f0f0f5;
+    --bg-gradient-top: rgba(232, 232, 237, 0.9);
+    --bg-gradient-bottom: rgba(245, 245, 247, 0.9);
+    
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    
+    --primary-color: #0066cc;
+    --primary-glow: rgba(0, 102, 204, 0.3);
+    --accent-color: #00aa55;
+    --secondary-color: #5e17a8;
+    
+    --border-color: #d2d2d7;
+    --success-color: #00aa55;
+    --warning-color: #cc8800;
+    --error-color: #dd3333;
+    
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Sharp corners for all elements */
+* {
+    border-radius: 0 !important;
+}
+
+/* Light theme background with NASA image - full visibility */
+[data-theme="light"] body {
+    background-image: url('../nasa1.jpg');
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', 'Inter', -apple-system, sans-serif;
+    background: var(--bg-primary);
+    /* NASA space background image - full visibility */
+    background-image: url('../nasa1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    transition: background var(--transition-speed), color var(--transition-speed);
+}
+
+/* ============================================
+   Layout Components
+   ============================================ */
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Header spans full width */
+.container > header {
+    grid-column: 1 / -1;
+    margin-bottom: 20px;
+}
+
+/* Footer spans full width */
+.container > footer {
+    grid-column: 1 / -1;
+    margin-top: 20px;
+}
+
+/* Left Column - Settings & Upload */
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Right Column - Output & Processing */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ============================================
+   Header Section
+   ============================================ */
+
+header {
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+    text-shadow: 0 0 40px var(--primary-glow);
+}
+
+header .subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 16px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.theme-toggle:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* ============================================
+   Content Sections
+   ============================================ */
+
+section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    transition: background var(--transition-speed), border-color var(--transition-speed);
+}
+
+/* Decorative top line for sections */
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+}
+
+section h2 {
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+/* ============================================
+   Settings Section (Format & Size Inputs)
+   ============================================ */
+
+.settings-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.settings-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.settings-row label {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+#outputFormat,
+#targetSize {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    transition: all var(--transition-speed);
+    font-family: inherit;
+}
+
+#outputFormat:focus,
+#targetSize:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px var(--primary-glow);
+}
+
+/* ============================================
+   Upload Zone (Drag & Drop Area)
+   ============================================ */
+
+.upload-section {
+    padding: 0;
+}
+
+.drop-zone {
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius);
+    padding: 60px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    background: var(--bg-surface);
+    position: relative;
+}
+
+/* Gradient overlay on hover */
+.drop-zone::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.05), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-speed);
+}
+
+.drop-zone:hover,
+.drop-zone.drag-over {
+    border-color: var(--primary-color);
+    box-shadow: inset 0 0 40px rgba(0, 240, 255, 0.1);
+}
+
+.drop-zone:hover::after,
+.drop-zone.drag-over::after {
+    opacity: 1;
+}
+
+.drop-zone-content {
+    position: relative;
+    z-index: 1;
+}
+
+.upload-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    display: block;
+    filter: drop-shadow(0 0 20px var(--primary-glow));
+}
+
+.drop-text {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.or-text {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin: 16px 0;
+}
+
+.browse-btn {
+    padding: 12px 32px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.browse-btn:hover {
+    background: var(--primary-color);
+    color: var(--bg-card);
+    box-shadow: 0 0 30px var(--primary-glow);
+}
+
+.supported-formats {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 16px;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   Progress Bar (Processing Indicator)
+   ============================================ */
+
+.progress-section {
+    padding: 20px 24px;
+}
+
+.progress-bar-container {
+    height: 2px;
+    background: var(--bg-surface);
+    border-radius: 1px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 1px;
+    transition: width var(--transition-speed) ease;
+    box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.progress-text {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ============================================
+   Files Grid (Uploaded File Cards)
+   ============================================ */
+
+.files-section {
+    padding: 20px 24px;
+}
+
+.files-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.files-header h2 {
+    margin-bottom: 0;
+}
+
+.download-all-btn {
+    padding: 10px 24px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--bg-card);
+    background: var(--accent-color);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.download-all-btn:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+    transform: translateY(-2px);
+}
+
+.files-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* ============================================
+   File Card (Individual File Display)
+   ============================================ */
+
+.file-card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg-card);
+    transition: all var(--transition-speed);
+}
+
+.file-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+}
+
+.file-card-header {
+    padding: 16px 20px;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.file-name {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.file-card-body {
+    padding: 20px;
+}
+
+/* Thumbnail Container */
+.thumbnail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.thumbnail {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    object-fit: contain;
+    background: var(--bg-primary);
+}
+
+/* PDF Page Selector */
+.pdf-page-selector,
+.convert-all-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.pdf-page-selector select {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+/* Convert All Pages Checkbox */
+.convert-all-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.convert-all-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+/* File Information Display */
+.file-info {
+    margin-bottom: 16px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.8rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.7rem;
+}
+
+.original-info,
+.converted-info {
+    font-weight: 400;
+    color: var(--text-primary);
+}
+
+.converted-info.success {
+    color: var(--accent-color);
+}
+
+/* Status Messages */
+.file-status {
+    font-size: 0.75rem;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    display: none;
+    letter-spacing: 0.5px;
+}
+
+.file-status.visible {
+    display: block;
+}
+
+.file-status.success {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--accent-color);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+}
+
+.file-status.warning {
+    background: rgba(255, 170, 0, 0.1);
+    color: var(--warning-color);
+    border: 1px solid rgba(255, 170, 0, 0.2);
+}
+
+.file-status.error {
+    background: rgba(255, 71, 87, 0.1);
+    color: var(--error-color);
+    border: 1px solid rgba(255, 71, 87, 0.2);
+}
+
+/* Card Footer with Action Buttons */
+.file-card-footer {
+    display: flex;
+    gap: 10px;
+    padding: 16px 20px;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-surface);
+}
+
+.file-card-footer button {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+/* Convert Button */
+.convert-btn {
+    background: linear-gradient(135deg, var(--primary-color), #00a8cc);
+    color: var(--bg-card);
+}
+
+.convert-btn:hover {
+    box-shadow: 0 0 25px var(--primary-glow);
+    transform: translateY(-2px);
+}
+
+.convert-btn:disabled {
+    background: var(--border-color);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Download Button */
+.download-btn {
+    background: linear-gradient(135deg, var(--accent-color), #00cc6a);
+    color: var(--bg-card);
+}
+
+.download-btn:hover {
+    box-shadow: 0 0 25px rgba(0, 255, 136, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Remove Button */
+.remove-btn {
+    background: transparent;
+    color: var(--error-color);
+    border: 1px solid var(--error-color) !important;
+}
+
+.remove-btn:hover {
+    background: var(--error-color);
+    color: var(--bg-card);
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+footer p {
+    margin-bottom: 8px;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.hidden {
+    display: none !important;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 24px 16px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .settings-section {
+        grid-template-columns: 1fr;
+    }
+
+    .drop-zone {
+        padding: 40px 16px;
+    }
+
+    .files-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .file-card-footer {
+        flex-wrap: wrap;
+    }
+
+    .file-card-footer button {
+        flex: 1 1 calc(50% - 5px);
+    }
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   Custom Scrollbar
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
